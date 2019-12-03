@@ -1,16 +1,28 @@
 <template>
   <div id="app">
-    <ClientLogin/>
+    <router-view @authenticated="setAuthenticated"/>
+    
   </div>
 </template>
 
 <script>
-import ClientLogin from './components/ClientLogin.vue'
+
 
 export default {
   name: 'app',
-  components: {
-    ClientLogin
+  data() {
+    return {
+      authenticated: false,
+      loggedInClient: ""
+    }
+  },
+  methods: {
+    setAuthenticated(status) {
+      this.authenticated = status
+    },
+    logout() {
+      this.authenticated = false;
+    }
   }
 }
 </script>
