@@ -58,12 +58,12 @@ export default {
         onSubmit(evt) {
             evt.preventDefault()
             this.axios.get('http//localhost/AdReviewBack/Users/readUser.php')
-            /*eslint no-unused-vars: "error"*/
+            
             .then (response => {
                 if(this.form.companyName != "" && this.form.password != "") {
                     if(this.form.companyName == this.companyName && this.form.password == this.password) {
                         this.$$emit("authenticated", true)
-                        // this.$router.replace({name: 'ClientCampaigns'})
+                        this.$router.replace({name: 'ClientCampaigns'})
                     } else {
                         alert('The username and/or password is incorrect.')
                     }

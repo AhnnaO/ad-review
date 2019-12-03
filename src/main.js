@@ -11,7 +11,7 @@ import VueAxios from 'vue-axios'
 
 Vue.use(VueRouter)
 Vue.use(BoostrapVue)
-Vue.use(axios, VueAxios)
+Vue.use(VueAxios, axios)
 
 Vue.config.productionTip = false
 
