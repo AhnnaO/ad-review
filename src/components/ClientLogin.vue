@@ -36,7 +36,9 @@
                             placeholder="Enter password"
                         >
                         </b-form-input> 
-                    </b-form-group>       
+
+                    </b-form-group> 
+
                 <b-button id="submit-btn" type="submit" variant="primary">Submit</b-button>
             </b-form>
             <div class="footer"></div>
@@ -44,7 +46,9 @@
     </div>
 </template>
 <script>
+// import { bus } from "../main.js"
 export default {
+    
     data() {
         return {
             form: {
@@ -57,26 +61,24 @@ export default {
     methods: {
         onSubmit(evt) {
             evt.preventDefault()
-            this.axios.get('http//localhost/AdReviewBack/Users/readUser.php')
-            
-            .then (response => {
                 if(this.form.companyName != "" && this.form.password != "") {
-                    if(this.form.companyName == this.companyName && this.form.password == this.password) {
-                        this.$$emit("authenticated", true)
+                    this.axios.get('http://localhost/AdReviewBack/Users/readUser.php?' + 'company_name=' + this.form.companyName + '&password=' + this.form.password)
+                    .then (response => {
+                        // this.$$emit("authenticated", true)
                         this.$router.replace({name: 'ClientCampaigns'})
-                    } else {
-                        alert('The username and/or password is incorrect.')
+                        
+                        alert( JSON.stringify(response.data))
                     }
-                } else {
-                    alert("A username and password must be present.")
-                } 
-                // not working
-                alert(this.companyName = response)
 
-            })
-            // working
-            // alert(JSON.stringify(this.form))
-        },
+                    )} else {
+                    alert("A username and password must be present.")
+                }
+            },
+
+        placeClientName() {
+            // bus.$emit(companyName, this.form.companyName)
+        },        
+
         onReset(evt) {
             evt.preventDefault()
             // reset form values

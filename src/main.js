@@ -15,8 +15,11 @@ Vue.use(VueAxios, axios)
 
 Vue.config.productionTip = false
 
+export const bus = new Vue();
+
 const router = new VueRouter({
-  routes: Routes
+  routes: Routes,
+  mode: 'history'
 })
 
 new Vue({

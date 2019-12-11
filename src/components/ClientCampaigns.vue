@@ -8,9 +8,10 @@ export default {
     name: 'Campaigns',
     data() {
         return {
-
+            clientName: ''
         }
-    }
+    },
+    
 }
 </script>
 <style>

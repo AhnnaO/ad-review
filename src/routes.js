@@ -1,5 +1,6 @@
 import ClientLogin from './components/ClientLogin'
 import ClientCampaigns from './components/ClientCampaigns'
+// import { bus } from 'main.js'
 
 export default [
     {
@@ -8,7 +9,7 @@ export default [
         component: ClientLogin
     },
     {
-        path: '/ClientCampaigns',
+        path: '/ClientCampaigns/{ companyName }',
         name: 'ClientCampaigns',
         component: ClientCampaigns
     }
