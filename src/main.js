@@ -9,6 +9,12 @@ import './custom.scss'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 
+import Header from './components/Header_footer/Header.vue';
+import Footer from './components/Header_footer/Footer.vue';
+
+Vue.component('app-header',Header)
+Vue.component('app-footer',Footer)
+
 Vue.use(VueRouter)
 Vue.use(BoostrapVue)
 Vue.use(VueAxios, axios)

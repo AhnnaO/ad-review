@@ -1,5 +1,6 @@
 <template>
     <div class="campaigns-page">
+        <app-header />
         <h1>Campaigns</h1>
     </div>
 </template>
@@ -11,7 +12,7 @@ export default {
             clientName: ''
         }
     },
-    
+
 }
 </script>
 <style>
