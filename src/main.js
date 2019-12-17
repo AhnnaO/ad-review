@@ -8,6 +8,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import './custom.scss'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import { store } from './store/store'
 
 import Header from './components/Header_footer/Header.vue';
 import Footer from './components/Header_footer/Footer.vue';
@@ -21,7 +22,7 @@ Vue.use(VueAxios, axios)
 
 Vue.config.productionTip = false
 
-export const bus = new Vue();
+// export const bus = new Vue();
 
 const router = new VueRouter({
   routes: Routes,
@@ -31,5 +32,6 @@ const router = new VueRouter({
 new Vue({
   el: '#app',
   render: h => h(App),
-  router: router
+  router: router,
+  store
 }).$mount('#app')

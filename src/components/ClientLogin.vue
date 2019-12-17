@@ -7,7 +7,7 @@
             <b-form class="form-box" @submit="onSubmit" @reset="onReset" v-if="show">
                 
                     <div class="col-xs-12">
-                        <h1 class="login">Login</h1>
+                        <h1 class="login">Login</h1>   
                     </div>
                     <b-form-group
                         class="text-center"
@@ -36,7 +36,6 @@
                             placeholder="Enter password"
                         >
                         </b-form-input> 
-
                     </b-form-group> 
 
                 <b-button id="submit-btn" type="submit" variant="primary">Submit</b-button>
@@ -46,7 +45,7 @@
     </div>
 </template>
 <script>
-// import { bus } from "../main.js"
+
 export default {
     
     data() {
@@ -71,7 +70,8 @@ export default {
                     }
 
                     )} else {
-                    alert("A username and password must be present.")
+                    // alert("A username and password must be present.")
+                    console.log("A username and password must be present.")
                 }
             },
 
@@ -103,6 +103,9 @@ export default {
         text-align: center;
     }
 
+    h1 {
+        float: none;
+    }
     .logo{
         padding-top: 5%;
         padding-bottom: 3%; 
