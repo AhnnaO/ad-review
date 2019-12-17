@@ -2,17 +2,30 @@
     <div class="header">
         <header>
         <nav>
-            <span><router-link to="/" tag="span" active-class="active" exact>Login</router-link></span>
-            <span><router-link to="/ClientCampaigns/{ companyName }" tag="span" active-class="active" exact>Home</router-link></span>
+            <span> <h1 class="company-name"> {{ name }} Campaigns</h1> </span>
+            <b-button class="nav-link"><router-link to="/" tag="span" active-class="active" exact>Logout</router-link></b-button>
+            <!-- <span><router-link to="/ClientCampaigns/{ companyName }" tag="span" active-class="active" exact>Home</router-link></span> -->
                 
         </nav>
         </header>
     </div>
 </template>
 
+<script>
+
+export default {
+  computed: {
+        name() {
+           return this.$store.state.name 
+        }
+    }
+}
+</script>
 <style>
+
 nav {
-  float: right;
+  
+  background: #F74902;
 }
  
 nav .active {
@@ -20,17 +33,29 @@ nav .active {
 } 
 
 nav span {
-  background: #F74902;
   font-size: 20px;
   padding: 5px 10px;
 }
 
+.company-name {
+  float: left;
+}
+
+.nav-link {
+  float: right;
+}
+
 header {
   background: #F74902;
-  border-bottom: 4px solid #607d8b;
+  border-bottom: 4px solid #734532;
   box-sizing: border-box;
-  padding: 30px;
+  padding: 50px;
   color: #ffffff;
   font-size: 30px;
+}
+
+.btn-secondary {
+  background-color: #734532;
+  border-color: #ffffff;
 }
 </style>
