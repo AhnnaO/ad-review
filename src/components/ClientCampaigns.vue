@@ -1,6 +1,7 @@
 <template>
     <div class="campaigns-page">
-        <app-header />
+        <app-header 
+        :company="company"/>
         <div class="sidebar">
             <!-- <h1>{{ this.state.companyName }} Campaigns</h1> -->
             <ul>
@@ -19,6 +20,7 @@
 // import { store } from './store/store'
 
 export default {
+    props: [ 'company' ]
     // data() {
     //     campaigns: []
     // },

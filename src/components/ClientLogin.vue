@@ -37,8 +37,9 @@
                         >
                         </b-form-input> 
                     </b-form-group> 
-
+                <!-- <router-link v-bind:to="{path: '/ClientCampaigns/' + id}"> -->
                 <b-button id="submit-btn" type="submit" variant="primary">Submit</b-button>
+                <!-- </router-link> -->
             </b-form>
             <div class="footer"></div>
         </div>
@@ -58,6 +59,7 @@ export default {
             },
             arrayResponse: [],
             company: '',
+            id: '',
             show: true
         }
     },
@@ -67,15 +69,11 @@ export default {
                 if(this.form.companyName != "" && this.form.password != "") {
                     axios.get('http://localhost/AdReviewBack/Users/readUser.php?' + 'company_name=' + this.form.companyName + '&password=' + this.form.password)
                     .then (response => {
-                        // this.$$emit("authenticated", true)
-                        this.$router.replace({name: 'ClientCampaigns'})
                         
-                        // console.log(JSON.stringify(response.data))
-                        // this.arrayResponse = 
-                        // console.log(this.arrayResponse)
-                        // console.log()
                         this.company = response.data[0].company_name
-                        console.log(this.company)
+                        this.id = response.data[0].id
+                        this.$router.push({path: `/ClientCampaigns/${this.company}`})
+                        console.log(this.id)
                     }
 
                     )} else {
