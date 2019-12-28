@@ -45,6 +45,8 @@
     </div>
 </template>
 <script>
+// import { store } from './store/store'
+import axios from 'axios'
 
 export default {
     
@@ -54,6 +56,8 @@ export default {
                 companyName: '',
                 password: ''
             },
+            arrayResponse: [],
+            company: '',
             show: true
         }
     },
@@ -61,12 +65,17 @@ export default {
         onSubmit(evt) {
             evt.preventDefault()
                 if(this.form.companyName != "" && this.form.password != "") {
-                    this.axios.get('http://localhost/AdReviewBack/Users/readUser.php?' + 'company_name=' + this.form.companyName + '&password=' + this.form.password)
+                    axios.get('http://localhost/AdReviewBack/Users/readUser.php?' + 'company_name=' + this.form.companyName + '&password=' + this.form.password)
                     .then (response => {
                         // this.$$emit("authenticated", true)
                         this.$router.replace({name: 'ClientCampaigns'})
                         
-                        alert( JSON.stringify(response.data))
+                        // console.log(JSON.stringify(response.data))
+                        // this.arrayResponse = 
+                        // console.log(this.arrayResponse)
+                        // console.log()
+                        this.company = response.data[0].company_name
+                        console.log(this.company)
                     }
 
                     )} else {

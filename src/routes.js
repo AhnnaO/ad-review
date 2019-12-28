@@ -9,7 +9,7 @@ export default [
         component: ClientLogin
     },
     {
-        path: '/ClientCampaigns/{ companyName }',
+        path: '/ClientCampaigns',
         name: 'ClientCampaigns',
         component: ClientCampaigns
     }
