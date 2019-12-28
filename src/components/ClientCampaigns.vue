@@ -3,14 +3,13 @@
         <app-header 
         :company="company"/>
         <div class="sidebar">
-            <!-- <h1>{{ this.state.companyName }} Campaigns</h1> -->
+            <p></p>
             <ul>
-                <!-- <li class="campaignList" 
-                v-for="campaign in campaigns" 
-                v-bind:key="campaign.data"
+                <li 
+                
                 > 
-                    {{ campaign }} 
-                </li> -->
+                    {{ this.campaigns }}
+                </li>
             </ul>
         </div>
         
@@ -20,10 +19,14 @@
 // import { store } from './store/store'
 
 export default {
-    props: [ 'company' ]
-    // data() {
-    //     campaigns: []
-    // },
+    props: [ 'company' ],
+    data() {
+        return {
+            campaign: '',
+            campaigns: [],
+            arrayFolder: []
+        }
+    },
     // mounted:
         // function getCampaigns() {
         //     this.axios.get('http://localhost/AdReviewBack/clients/clientABC/scandir.php')
@@ -31,15 +34,22 @@ export default {
         //     (this.campaigns = response.data)
         // )
     // },
-    
-    // methods: {
-    //     getCampaigns() {
-    //         this.axios.get('http://localhost/AdReviewBack/clients/clientABC/scandir.php')
-    //         .then(response => 
-    //             (this.campaigns = response.data)
-    //         )
-    //     }
-    // }
+    mounted() {
+        this.getCampaigns()
+    },
+    methods: {
+        getCampaigns() {
+            this.axios.get('http://localhost/AdReviewBack/clients/clientABC/scandir.php')
+            
+            .then(response => 
+                this.campaigns = response.data
+                
+            )
+            // console.log(this.campaigns)
+            
+            console.log(this.campaigns)
+        }
+    }
 }
 </script>
 <style scoped>
