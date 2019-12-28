@@ -9,8 +9,9 @@ export default [
         component: ClientLogin
     },
     {
-        path: '/ClientCampaigns',
+        path: '/ClientCampaigns/:company',
         name: 'ClientCampaigns',
+        props: true,
         component: ClientCampaigns
     }
 ]

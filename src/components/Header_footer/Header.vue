@@ -2,7 +2,7 @@
     <div class="header">
         <header>
         <nav>
-            <span> <h1 class="company-name"> {{ name }} Campaigns</h1> </span>
+            <span> <h1 class="company-name">{{ company }} Campaigns</h1> </span>
             <b-button class="nav-link"><router-link to="/" tag="span" active-class="active" exact>Logout</router-link></b-button>
             <!-- <span><router-link to="/ClientCampaigns/{ companyName }" tag="span" active-class="active" exact>Home</router-link></span> -->
                 
@@ -12,13 +12,30 @@
 </template>
 
 <script>
-
+// import axios from 'axios'
 export default {
-  computed: {
-        name() {
-           return this.$store.state.name 
-        }
+  data() {
+    return {
+      client: null,
+      responseData: []
     }
+  },
+props: {
+  company: String
+},
+  
+    mounted(){
+      // axios.get('http://localhost/AdReviewBack/Users/readAllUsers.php')
+      // .then(response =>{
+      //   this.responseData = response.data
+        // this.client = this.responseData.find(
+        //   name => {return name.company_name == 'abc'}
+        // )
+        console.log(this.company)
+      }
+      
+    
+
 }
 </script>
 <style>
