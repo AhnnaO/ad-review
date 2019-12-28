@@ -4,7 +4,7 @@
         <nav>
             <span> <h1 class="company-name">{{ company }} Campaigns</h1> </span>
             <b-button class="nav-link"><router-link to="/" tag="span" active-class="active" exact>Logout</router-link></b-button>
-            <!-- <span><router-link to="/ClientCampaigns/{ companyName }" tag="span" active-class="active" exact>Home</router-link></span> -->
+            
                 
         </nav>
         </header>
