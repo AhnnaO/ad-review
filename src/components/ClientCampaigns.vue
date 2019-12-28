@@ -5,10 +5,8 @@
         <div class="sidebar">
             <p></p>
             <ul>
-                <li 
-                
-                > 
-                    {{ this.campaigns }}
+                <li v-for="campaign in campaigns" :key="campaign"> 
+                    {{ campaign }}
                 </li>
             </ul>
         </div>
@@ -23,17 +21,10 @@ export default {
     data() {
         return {
             campaign: '',
-            campaigns: [],
-            arrayFolder: []
+            campaigns: {},
+            index: Number
         }
     },
-    // mounted:
-        // function getCampaigns() {
-        //     this.axios.get('http://localhost/AdReviewBack/clients/clientABC/scandir.php')
-        //     .then(response => 
-        //     (this.campaigns = response.data)
-        // )
-    // },
     mounted() {
         this.getCampaigns()
     },
@@ -41,13 +32,12 @@ export default {
         getCampaigns() {
             this.axios.get('http://localhost/AdReviewBack/clients/clientABC/scandir.php')
             
-            .then(response => 
+            .then(response => {
                 this.campaigns = response.data
-                
+                console.log(this.campaigns)
+                }
             )
-            // console.log(this.campaigns)
             
-            console.log(this.campaigns)
         }
     }
 }
