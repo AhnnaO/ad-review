@@ -47,7 +47,7 @@ nav span {
 
 header {
   background: #F74902;
-  border-bottom: 4px solid #734532;
+  border-bottom: 4px solid #00AB8E;
   box-sizing: border-box;
   padding: 50px;
   color: #ffffff;
@@ -55,7 +55,7 @@ header {
 }
 
 .btn-secondary {
-  background-color: #734532;
+  background-color: #00AB8E;
   border-color: #ffffff;
 }
 </style>
