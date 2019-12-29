@@ -8,7 +8,6 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import './custom.scss'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
-import { store } from './store/store'
 
 import Header from './components/Header_footer/Header.vue';
 import Footer from './components/Header_footer/Footer.vue';
@@ -33,5 +32,4 @@ new Vue({
   el: '#app',
   render: h => h(App),
   router: router,
-  store
 }).$mount('#app')

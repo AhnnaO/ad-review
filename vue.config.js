@@ -2,6 +2,6 @@
 module.exports = {
     // options...
     devServer: {
-          proxy: 'https://sometest.se/',
-      }
-  }
+        proxy: 'https://sometest.se/',
+    }
+}

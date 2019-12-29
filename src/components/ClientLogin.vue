@@ -37,17 +37,16 @@
                         >
                         </b-form-input> 
                     </b-form-group> 
-                <!-- <router-link v-bind:to="{path: '/ClientCampaigns/' + id}"> -->
+                
                 <b-button id="submit-btn" type="submit" variant="primary">Submit</b-button>
-                <!-- </router-link> -->
+                
             </b-form>
             <div class="footer"></div>
         </div>
     </div>
 </template>
 <script>
-// import { store } from './store/store'
-import axios from 'axios'
+
 
 export default {
     
@@ -67,7 +66,7 @@ export default {
         onSubmit(evt) {
             evt.preventDefault()
                 if(this.form.companyName != "" && this.form.password != "") {
-                    axios.get('http://localhost/AdReviewBack/Users/readUser.php?' + 'company_name=' + this.form.companyName + '&password=' + this.form.password)
+                    this.axios.get('http://localhost/AdReviewBack/Users/readUser.php?' + 'company_name=' + this.form.companyName + '&password=' + this.form.password)
                     .then (response => {
                         
                         this.company = response.data[0].company_name
