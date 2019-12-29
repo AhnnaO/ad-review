@@ -1,7 +1,7 @@
 import ClientLogin from './components/ClientLogin'
 import ClientCampaigns from './components/ClientCampaigns'
-import AdTypes from './components/AdTypes'
-
+import Campaigns from './components/Lists/Campaigns'
+import AdTypes from './components/Lists/AdTypes'
 
 export default [
     {
@@ -12,22 +12,22 @@ export default [
     {
         path: '/ClientCampaigns/:company',
         children: [
-            {
-              // UserProfile will be rendered inside User's <router-view>
-              // when /user/:id/profile is matched
-              path: '/ClientCampaigns/:company/AdTypes',
-              name: 'AdTypes',
-            //   props: true,
-              component: AdTypes
-            }],
-            // {
-            //   // UserPosts will be rendered inside User's <router-view>
-            //   // when /user/:id/posts is matched
-            //   path: 'posts',
-            //   component: UserPosts
-            // }
+          {
+            path: '/ClientCampaigns/:company/:campaign',
+            name: 'Campaigns',
+            props: true,
+            component: Campaigns
+        },
+        {
+          path: '/ClientCampaigns/:company/:adType',
+          name: 'AdTypes',
+          props: true,
+          component: AdTypes
+        }
+      ],
         name: 'ClientCampaigns',
         props: true,
         component: ClientCampaigns
-    }
+
+      }
 ]

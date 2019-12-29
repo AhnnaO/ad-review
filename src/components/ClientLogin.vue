@@ -79,11 +79,7 @@ export default {
                     // alert("A username and password must be present.")
                     console.log("A username and password must be present.")
                 }
-            },
-
-        placeClientName() {
-            // bus.$emit(companyName, this.form.companyName)
-        },        
+            },        
 
         onReset(evt) {
             evt.preventDefault()

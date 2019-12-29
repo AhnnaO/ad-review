@@ -1,19 +1,20 @@
 <template>
     <div>
-        <div class="sidebar">
-            <router-view />
-            <ul>
-                <li v-for="ad in ads" :key="ad">
-                    {{ ad }}
-                </li>
-            </ul>
-        </div>
+        
+            
+                {{ adType }}
+                <ul>
+                    <li v-for="ad in ads" :key="ad">
+                        {{ ad }}
+                    </li>
+                </ul>
+         
     </div>
 </template>
 <script>
 export default {
     props: {
-        ad: String
+        adType: String
     },
     data() {
         return {
@@ -21,6 +22,8 @@ export default {
         }
     },
     mounted() {
+        this.adType
+        console.log(this.adType)
         this.getAdTypes()
     },
     methods: {
