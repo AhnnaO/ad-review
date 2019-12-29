@@ -12,7 +12,6 @@
 </template>
 
 <script>
-// import axios from 'axios'
 export default {
   data() {
     return {
@@ -25,24 +24,20 @@ props: {
 },
   
     mounted(){
-      // axios.get('http://localhost/AdReviewBack/Users/readAllUsers.php')
-      // .then(response =>{
-      //   this.responseData = response.data
-        // this.client = this.responseData.find(
-        //   name => {return name.company_name == 'abc'}
-        // )
+      
         console.log(this.company)
       }
-      
-    
-
 }
 </script>
-<style>
+
+<style lang="scss" scoped>
+
+$isobarOrange: #F74902;
+$buttonColor: #939A9F;
+$whiteBase: #FFFFFF;
 
 nav {
-  
-  background: #F74902;
+  background: $isobarOrange;
 }
  
 nav .active {
@@ -63,16 +58,17 @@ nav span {
 }
 
 header {
-  background: #F74902;
-  border-bottom: 4px solid #00AB8E;
+  background: $isobarOrange;
+  border-bottom: 4px solid $buttonColor;
   box-sizing: border-box;
   padding: 50px;
-  color: #ffffff;
+  color: $whiteBase;
   font-size: 30px;
 }
 
 .btn-secondary {
-  background-color: #00AB8E;
-  border-color: #ffffff;
+  background-color: $buttonColor;
+  border-color: $whiteBase;
 }
+
 </style>
