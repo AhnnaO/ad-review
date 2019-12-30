@@ -2,7 +2,7 @@
     <div>
         
             
-                {{ adType }}
+                {{ value }}
                 <ul>
                     <li v-for="ad in ads" :key="ad">
                         {{ ad }}
@@ -13,22 +13,22 @@
 </template>
 <script>
 export default {
-    props: {
-        adType: String
-    },
+    props: [ 'company',
+        'campaign',
+        'adType',
+        'adVersion'],
     data() {
         return {
-            ads: {}
+            ads: {},
+            Company: this.$props.company
         }
     },
     mounted() {
-        this.adType
-        console.log(this.adType)
         this.getAdTypes()
     },
     methods: {
         getAdTypes() {
-            this.axios.get('http://localhost/AdReviewBack/clients/clientABC/191127_ad_review/scandir.php')
+            this.axios.get('http://localhost/AdReviewBack/clients/${this.Company}/${value}scandir.php')
             .then(response => {
                 this.ads = response.data
                 console.log(this.ads)

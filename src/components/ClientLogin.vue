@@ -71,7 +71,7 @@ export default {
                         
                         this.company = response.data[0].company_name
                         this.id = response.data[0].id
-                        this.$router.push({path: `/ClientCampaigns/${this.company}`})
+                        this.$router.push({path: `/ClientHome/${this.company}`})
                         console.log(this.id)
                     }
 
