@@ -71,7 +71,7 @@ export default {
                         
                         this.company = response.data[0].company_name
                         this.id = response.data[0].id
-                        this.$router.push({path: `/ClientCampaigns/${this.company}`})
+                        this.$router.push({path: `/ClientHome/${this.company}`})
                         console.log(this.id)
                     }
 
@@ -79,11 +79,7 @@ export default {
                     // alert("A username and password must be present.")
                     console.log("A username and password must be present.")
                 }
-            },
-
-        placeClientName() {
-            // bus.$emit(companyName, this.form.companyName)
-        },        
+            },        
 
         onReset(evt) {
             evt.preventDefault()

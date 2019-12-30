@@ -3,30 +3,37 @@
         <app-header 
         :company="company"/>
         <div class="sidebar">
-            
             <ul>
-                
-                <li v-for="campaign in campaigns" :key="campaign" @click="chooseCampaign"> 
+                <li v-for="campaign in campaigns" :key="campaign" @click.capture="chooseCampaign(campaign)"> 
                     {{ campaign }}
+                    
                 </li>
-                <router-view :ads="ads"/>
+                
             </ul>
-            
+            <!-- <Campaigns /> -->
+            <!-- <AdTypes :value="value"/> -->
+            <router-view />
         </div>
         
     </div>
 </template>
 <script>
-// import { store } from './store/store'
+// import AdTypes from './Lists/AdTypes.vue'
 
 export default {
     props: [ 'company',
-            'ads'],
+        'campaign',
+        'adType',
+        'adVersion'],
+    // components: {
+    //     AdTypes
+    // },
     data() {
         return {
-            campaign: '',
+            // Campaign: this.$props.campaign,
             campaigns: {},
-            ad: {}
+            ad: {},
+            Company: this.$props.company
         }
     },
     mounted() {
@@ -34,18 +41,21 @@ export default {
     },
     methods: {
         getCampaigns() {
-            this.axios.get('http://localhost/AdReviewBack/clients/clientABC/scandir.php')
+            this.axios.get(`http://localhost/AdReviewBack/clients/${this.Company}/scandir.php`)
             .then(response => {
                 this.campaigns = response.data
                 console.log(this.campaigns)
                 }
             )           
         },
-        chooseCampaign() {
-            this.axios.get('http://localhost/AdReviewBack/clients/clientABC/191127_ad_review/scandir.php')
+        chooseCampaign(value) {
+            this.axios.get(`http://localhost/AdReviewBack/clients/${this.Company}/${value}/scandir.php`)
+            
             .then(response => {
-                this.ad = response.data
-                this.$router.push({path: `/ClientCampaigns/${this.company}/AdTypes`})
+                this.$router.push({path: `/ClientCampaigns/${this.Company}/${value}`})
+
+                value = response.data
+                console.log(value)
             })
         }
     }
@@ -56,6 +66,14 @@ $isobarOrange: #F74902;
 $buttonColor: #939A9F;
 $whiteBase: #FFFFFF;
 $sidbar: #3E3C3B;
+$whiteBase: #FFFFFF;
+    li {
+        list-style: none;
+        font-size: 1.5em;
+        color: $whiteBase;
+        padding: 1%;
+        margin-left: 0px;
+    }
 
     .sidebar {
         height: 100%;
@@ -73,12 +91,6 @@ $sidbar: #3E3C3B;
         margin-left: 25px;
     }
 
-    li {
-        list-style: none;
-        font-size: 1.5em;
-        color: $whiteBase;
-        padding: 1%;
-        margin-left: 0px;
-    }
+    
     
 </style>

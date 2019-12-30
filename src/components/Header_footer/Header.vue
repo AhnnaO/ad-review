@@ -13,20 +13,12 @@
 
 <script>
 export default {
-  data() {
-    return {
-      client: null,
-      responseData: []
-    }
+  props: {
+    company: String
   },
-props: {
-  company: String
-},
-  
-    mounted(){
-      
-        console.log(this.company)
-      }
+  mounted(){
+    console.log(this.company)
+  }
 }
 </script>
 
