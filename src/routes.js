@@ -3,6 +3,7 @@ import ClientHome from './components/ClientHome'
 // import Campaigns from './components/Lists/Campaigns'
 import AdTypes from './components/Lists/AdTypes'
 import AdVersions from './components/Lists/AdVersions'
+import Sizes from './components/Lists/Sizes'
 
 export default [
     {
@@ -12,17 +13,26 @@ export default [
     },
     {
         path: '/ClientHome/:company',
-        meta: {breadcrumb: 'ClientCampaigns'},
+        meta: {breadcrumb: 'ClientHome'},
         children: [
           {
-            path: '/ClientHome/:company/:value',
+            path: '/ClientHome/:company/:adType',
             meta: {breadcrumb: 'AdTypes'},
             children: [
               
                   {
                     path: '/ClientHome/:company/:adType/:adVersion',
-                    meta: {breadcrumb: 'adVersions'},
-                    name: 'adVersions',
+                    meta: {breadcrumb: 'AdVersions'},
+                    children: [
+                      {
+                        path: '/ClientHome/:company/:adType/:adVersion/:size',
+                        meta: {breadcrumb: 'Sizes'},
+                        name: 'Sizes',
+                        props: true,
+                        component: Sizes
+                      }
+                    ],
+                    name: 'AdVersions',
                     props: true,
                     component: AdVersions
                   }

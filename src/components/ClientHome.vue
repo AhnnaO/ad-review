@@ -33,7 +33,8 @@ export default {
             // Campaign: this.$props.campaign,
             campaigns: {},
             ad: {},
-            Company: this.$props.company
+            Company: this.$props.company,
+           
         }
     },
     mounted() {
@@ -48,14 +49,14 @@ export default {
                 }
             )           
         },
-        chooseCampaign(value) {
-            this.axios.get(`http://localhost/AdReviewBack/clients/${this.Company}/${value}/scandir.php`)
-            
+        chooseCampaign(adType) {
+            console.log(adType)
+            this.axios.get(`http://localhost/AdReviewBack/clients/${this.Company}/${adType}/scandir.php`)
             .then(response => {
-                this.$router.push({path: `/ClientCampaigns/${this.Company}/${value}`})
+                this.$router.push({path: `/ClientHome/${this.Company}/${adType}`})
 
-                value = response.data
-                console.log(value)
+                adType = response.data
+                console.log(adType)
             })
         }
     }
