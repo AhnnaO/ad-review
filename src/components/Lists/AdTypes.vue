@@ -3,7 +3,7 @@
         <p>
             {{ adType }}
         </p>
-        <ul>
+        <ul id="adVersions">
             <li v-for="ad in ads" :key="ad" @click.capture="chooseAdType(ad)">
                 {{ ad }}
             </li>

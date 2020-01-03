@@ -5,7 +5,7 @@
                 <p>
                     {{ adVersion }}
                 </p>
-                <ul id="versions">
+                <ul id="versionChoice">
                     <li v-for="version in versions" :key="version" @click.capture="chooseAdVersion(version)">
                         {{ version }}
                     </li>
@@ -36,6 +36,7 @@ export default {
         getAdVersions() {
             this.axios.get(`http://localhost/AdReviewBack/clients/${this.Company}/${this.AdType}/${this.AdVersion}/scandir.php`)
             .then(response => {
+                document.getElementById("adVersions").style.display = "none";
                 this.versions = response.data
                 console.log(this.versions)
                 }

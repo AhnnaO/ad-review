@@ -40,6 +40,7 @@ export default {
         getAdSizes() {
             this.axios.get(`http://localhost/AdReviewBack/clients/${this.Company}/${this.AdType}/${this.AdVersion}/${this.VersionChoice}/scandir.php`)
             .then(response => {
+                document.getElementById("versionChoice").style.display = "none";
                 this.sizes = response.data
                 console.log(this.sizes)
                 }
