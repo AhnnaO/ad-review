@@ -3,7 +3,7 @@ import ClientHome from './components/ClientHome'
 // import Campaigns from './components/Lists/Campaigns'
 import AdTypes from './components/Lists/AdTypes'
 import AdVersions from './components/Lists/AdVersions'
-import Sizes from './components/Lists/Sizes'
+import VersionChoice from './components/Lists/VersionChoice'
 
 export default [
     {
@@ -25,11 +25,11 @@ export default [
                     meta: {breadcrumb: 'AdVersions'},
                     children: [
                       {
-                        path: '/ClientHome/:company/:adType/:adVersion/:size',
-                        meta: {breadcrumb: 'Sizes'},
-                        name: 'Sizes',
+                        path: '/ClientHome/:company/:adType/:adVersion/:versionChoice',
+                        meta: {breadcrumb: 'VersionChoice'},
+                        name: 'VersionChoice',
                         props: true,
-                        component: Sizes
+                        component: VersionChoice
                       }
                     ],
                     name: 'AdVersions',
