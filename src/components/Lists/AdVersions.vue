@@ -5,7 +5,7 @@
                 <p>
                     {{ adVersion }}
                 </p>
-                <ul>
+                <ul id="versions">
                     <li v-for="version in versions" :key="version" @click.capture="chooseAdVersion(version)">
                         {{ version }}
                     </li>
@@ -18,7 +18,8 @@ export default {
     props: [ 'company',
         'campaign',
         'adType',
-        'adVersion'],
+        'adVersion',
+        'versionChoice'],
     data() {
         return {
             ads: {},
@@ -40,14 +41,15 @@ export default {
                 }
             )           
         },
-        chooseAdVersion(size) {
-            console.log(size)
-            this.axios.get(`http://localhost/AdReviewBack/clients/${this.Company}/${this.AdType}/${this.AdVersion}/${size}scandir.php`)
+        chooseAdVersion(versionChoice) {
+            console.log(versionChoice)
+            this.axios.get(`http://localhost/AdReviewBack/clients/${this.Company}/${this.AdType}/${this.AdVersion}/${versionChoice}/scandir.php`)
             .then(response => {
-                this.$router.push({path: `/ClientHome/${this.Company}/${this.AdType}/${this.AdVersion}/${size}`})
+                this.$router.push({path: `/ClientHome/${this.Company}/${this.AdType}/${this.AdVersion}/${versionChoice}`}
+                )
 
-                size = response.data
-                console.log(size)
+                versionChoice = response.data
+                console.log(versionChoice)
             })
         }
     }

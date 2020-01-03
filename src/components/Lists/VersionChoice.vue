@@ -2,14 +2,14 @@
     <div>
         
             
-                <!-- <p>
-                    {{ size }}
+                <p>
+                    {{ versionChoice }}
                 </p>
                 <ul>
                     <li v-for="size in sizes" :key="size" @click.capture="chooseAdType(size)">
                         {{ size }}
                     </li>
-                </ul> -->
+                </ul>
         <router-view /> 
     </div>
 </template>
@@ -19,38 +19,37 @@ export default {
         'campaign',
         'adType',
         'adVersion',
-        'size'],
+        'versionChoice'],    
     data() {
         return {
             ads: {},
             Company: this.$props.company,
             AdType: this.$props.adType,
             AdVersion: this.$props.adVersion,
-            Size: this.$props.size,
+            VersionChoice: this.$props.versionChoice,
             versions: {},
             sizes: {},
             
 
         }
     },
-    // mounted() {
-    //     this.getAdSizes()
-    // },
+    mounted() {
+        this.getAdSizes()
+    },
     methods: {
-        // getAdSizes() {
-        //     console.log(size)
-        //     this.axios.get(`http://localhost/AdReviewBack/clients/${this.Company}/${this.AdType}/${this.AdVersion}/${this.Size}/scandir.php`)
-        //     .then(response => {
-        //         this.sizes = response.data
-        //         console.log(this.sizes)
-        //         }
-        //     )           
-        // },
+        getAdSizes() {
+            this.axios.get(`http://localhost/AdReviewBack/clients/${this.Company}/${this.AdType}/${this.AdVersion}/${this.VersionChoice}/scandir.php`)
+            .then(response => {
+                this.sizes = response.data
+                console.log(this.sizes)
+                }
+            )           
+        },
         // chooseAd(size) {
         //     console.log(size)
-        //     this.axios.get(`http://localhost/AdReviewBack/clients/${this.Company}/${this.AdType}/${this.AdVersion}/${size}scandir.php`)
+        //     this.axios.get(`http://localhost/AdReviewBack/clients/${this.Company}/${this.AdType}/${this.AdVersion}/${versionChoice}scandir.php`)
         //     .then(response => {
-        //         this.$router.push({path: `/ClientHome/${this.Company}/${this.AdType}/${this.AdVersion}/${size}`})
+        //         this.$router.push({path: `/ClientHome/${this.Company}/${this.AdType}/${this.AdVersion}/${versionChoice}`})
 
         //         size = response.data
         //         console.log(size)

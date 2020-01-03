@@ -3,34 +3,45 @@
         <app-header 
         :company="company"/>
         <div class="sidebar">
-            <ul id="adTypes" style="display:block;">
-                <li v-for="campaign in campaigns" :key="campaign" @click.capture="chooseCampaign(campaign)"> 
-                    {{ campaign }}
-                    
-                </li>
-                
-            </ul>
-            <router-view />
+            <component v-bind:is="component"></component>
+            <ul id="adTypes">
+            <li v-for="campaign in campaigns" :key="campaign" @click.capture="chooseCampaign(campaign)"> 
+                {{ campaign }}            
+            </li>
+        </ul>
+            <!-- <router-view /> -->
         </div>
         
     </div>
 </template>
 <script>
 
+import AdTypes from './Lists/AdTypes'
+import AdVersions from './Lists/AdVersions'
+import VersionChoice from './Lists/VersionChoice'
+import Campaigns from './Lists/Campaigns'
+
 export default {
     props: [ 'company',
-        // 'campaign',
+        'campaign',
         'adType',
         'adVersion'],
     data() {
         return {
+            // component: 'Campaigns',
             campaigns: {},
-            ad: {},
+            // ad: {},
             Company: this.$props.company,
            
         }
     },
-    mounted() {
+    components: {
+        AdTypes,
+        AdVersions,
+        VersionChoice,
+        Campaigns
+    },
+     mounted() {
         this.getCampaigns()
     },
     methods: {
@@ -46,13 +57,27 @@ export default {
             console.log(campaignName)
             this.axios.get(`http://localhost/AdReviewBack/clients/${this.Company}/${campaignName}/scandir.php`)
             .then(response => {
-                this.$router.push({path: `/ClientHome/${this.Company}/${campaignName}`})
+                // this.$router.push({path: `/ClientHome/${this.Company}/${campaignName}`})
 
                 campaignName = response.data
                 console.log(campaignName)
             })
         }
+    },
+    computed: {
+        component() {
+            if(this.chooseCampaign(this.campaign) == 'campaignName') {
+                return 'AdTypes'
+            } else if(this.$props == 'ads') {
+                return 'AdTypes'
+            } else if(this.$props == 'versions') {
+                return 'AdVersions'
+            } else {
+                return 'VersionChoice'
+            }
+        }
     }
+    
 }
 </script>
 <style lang="scss" scoped>

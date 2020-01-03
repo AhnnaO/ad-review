@@ -1,22 +1,20 @@
 <template>
     <div>
-        
-            
-                <p>
-                    {{ adType }}
-                </p>
-                <ul>
-                    <li v-for="ad in ads" :key="ad" @click.capture="chooseAdType(ad)">
-                        {{ ad }}
-                    </li>
-                </ul>
+        <p>
+            {{ adType }}
+        </p>
+        <ul>
+            <li v-for="ad in ads" :key="ad" @click.capture="chooseAdType(ad)">
+                {{ ad }}
+            </li>
+        </ul>
         <router-view />
     </div>
 </template>
 <script>
 export default {
     props: [ 'company',
-        'campaign',
+        // 'campaign',
         'adType',
         'adVersion'],
     data() {
@@ -34,6 +32,7 @@ export default {
             //this.axios.get('http://localhost/AdReviewBack/system/backend.php?client=${this.Company}&campaign=')
             this.axios.get(`http://localhost/AdReviewBack/clients/${this.Company}/${this.AdType}/scandir.php`)
             .then(response => {
+                document.getElementById("adTypes").style.display = "none";
                 this.ads = response.data
                 console.log(this.ads)
                 }
