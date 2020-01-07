@@ -28,15 +28,7 @@ export default [
                       {
                         path: '/ClientHome/:company/:adType/:adVersion/:versionChoice',
                         meta: {breadcrumb: 'VersionChoice'},
-                        children: [
-                          {
-                            path: '/ClientHome/:company/:adType/:adVersion/:versionChoice/:renderAd',
-                            meta: {breadcrumb: 'RenderAd'},
-                            name: 'RenderAd',
-                            props: true,
-                            component: RenderAd
-                          }
-                        ],
+                       
                         name: 'VersionChoice',
                         props: true,
                         component: VersionChoice
@@ -56,8 +48,15 @@ export default [
         ],
         name: 'ClientHome',
         props: true,
-        component: ClientHome
+        component: ClientHome,
     
+    },
+    {
+      path: '/ClientHome/:company/:adType/:adVersion/:versionChoice/:renderAd',
+      meta: {breadcrumb: 'RenderAd'},
+      name: 'RenderAd',
+      props: true,
+      component: RenderAd
     }
     
 ]

@@ -38,6 +38,10 @@ export default {
     },
     methods: {
         getAdSizes() {
+            // Possibly put iframe function here...so all 3 sizes of index.html show on the right.
+
+
+            // this.axios.get(`http://localhost/AdReviewBack/scandir.php?client=${this.Company}&adtype=${this.AdType}`)
             this.axios.get(`http://localhost/AdReviewBack/clients/${this.Company}/${this.AdType}/${this.AdVersion}/${this.VersionChoice}/scandir.php`)
             .then(response => {
                 document.getElementById("versionChoice").style.display = "none";

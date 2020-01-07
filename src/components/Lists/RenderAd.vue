@@ -30,10 +30,11 @@ export default {
         this.getAd()
     },
     methods: {
+        // Need a function for iframe
         getAd() {
             this.axios.get(`http://localhost/AdReviewBack/clients/${this.Company}/${this.AdType}/${this.AdVersion}/${this.VersionChoice}/${this.RenderAd}/index.html`)
             .then(response => {
-                document.getElementById("renderAd").style.display = "none";
+                // document.getElementById("renderAd").style.display = "none";
                 this.ad = response.data
                 console.log(this.ad)
                 }
