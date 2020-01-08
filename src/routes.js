@@ -4,7 +4,7 @@ import ClientHome from './components/ClientHome'
 import AdTypes from './components/Lists/AdTypes'
 import AdVersions from './components/Lists/AdVersions'
 import VersionChoice from './components/Lists/VersionChoice'
-import RenderAd from './components/Lists/RenderAd'
+// import RenderAd from './components/Lists/RenderAd'
 
 export default [
     {
@@ -51,12 +51,12 @@ export default [
         component: ClientHome,
     
     },
-    {
-      path: '/ClientHome/:company/:adType/:adVersion/:versionChoice/:renderAd',
-      meta: {breadcrumb: 'RenderAd'},
-      name: 'RenderAd',
-      props: true,
-      component: RenderAd
-    }
+    // {
+    //   path: '/ClientHome/:company/:adType/:adVersion/:versionChoice/:renderAd',
+    //   meta: {breadcrumb: 'RenderAd'},
+    //   name: 'RenderAd',
+    //   props: true,
+    //   component: RenderAd
+    // }
     
 ]

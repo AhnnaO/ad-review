@@ -9,11 +9,13 @@ import './custom.scss'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 
-import Header from './components/Header_footer/Header.vue';
-import Footer from './components/Header_footer/Footer.vue';
+import Header from './components/Header_footer/Header'
+import Footer from './components/Header_footer/Footer'
+import RenderAd from './components/Lists/RenderAd'
 
 Vue.component('app-header',Header)
 Vue.component('app-footer',Footer)
+Vue.component('app-renderAd',RenderAd)
 
 Vue.use(VueRouter)
 Vue.use(BoostrapVue)

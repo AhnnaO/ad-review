@@ -1,7 +1,5 @@
 <template>
     <div>
-        
-            
                 <p>
                     {{ versionChoice }}
                 </p>
@@ -10,6 +8,7 @@
                         {{ size }}
                     </li>
                 </ul>
+                
         <router-view /> 
     </div>
 </template>
@@ -19,7 +18,9 @@ export default {
         'campaign',
         'adType',
         'adVersion',
-        'versionChoice'],    
+        'versionChoice',
+        'renderAd'],  
+
     data() {
         return {
             ads: {},
@@ -27,6 +28,7 @@ export default {
             AdType: this.$props.adType,
             AdVersion: this.$props.adVersion,
             VersionChoice: this.$props.versionChoice,
+            RenderAd: this.$props.renderAd,
             versions: {},
             sizes: {},
             
@@ -35,6 +37,7 @@ export default {
     },
     mounted() {
         this.getAdSizes()
+        // this.getAd()
     },
     methods: {
         getAdSizes() {
@@ -54,12 +57,22 @@ export default {
             console.log(renderAd)
             this.axios.get(`http://localhost/AdReviewBack/clients/${this.Company}/${this.AdType}/${this.AdVersion}/${this.VersionChoice}/${renderAd}/index.html`)
             .then(response => {
-                this.$router.push({path: `/ClientHome/${this.Company}/${this.AdType}/${this.AdVersion}/${this.VersionChoice}/${renderAd}`})
-
+                //this.$router.push({path: `/ClientHome/${this.Company}/${this.AdType}/${this.AdVersion}/${this.VersionChoice}/${renderAd}`})
+                this.$parent.$parent.$parent.adrenderVariable = 'THIS IS WHERE THE AD GOES'
+                console
                 renderAd = response.data
                 console.log(renderAd)
             })
-        }
+        },
+        // getAd() {
+        //     this.axios.get(`http://localhost/AdReviewBack/clients/${this.Company}/${this.AdType}/${this.AdVersion}/${this.VersionChoice}/${this.RenderAd}/index.html`)
+        //     .then(response => {
+        //         // document.getElementById("renderAd").style.display = "none";
+        //         this.ad = response.data
+        //         console.log(this.ad)
+        //         }
+        //     )           
+        // },
     }
 }
 </script>
