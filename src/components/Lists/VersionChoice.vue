@@ -1,15 +1,14 @@
 <template>
     <div>
-        
-            
                 <p>
                     {{ versionChoice }}
                 </p>
-                <ul>
-                    <li v-for="size in sizes" :key="size" @click.capture="chooseAdType(size)">
+                <ul id="renderAd">
+                    <li v-for="size in sizes" :key="size" @click.capture="chooseAd(size)">
                         {{ size }}
                     </li>
                 </ul>
+                
         <router-view /> 
     </div>
 </template>
@@ -19,7 +18,9 @@ export default {
         'campaign',
         'adType',
         'adVersion',
-        'versionChoice'],    
+        'versionChoice',
+        'renderAd'],  
+
     data() {
         return {
             ads: {},
@@ -27,6 +28,7 @@ export default {
             AdType: this.$props.adType,
             AdVersion: this.$props.adVersion,
             VersionChoice: this.$props.versionChoice,
+            RenderAd: this.$props.renderAd,
             versions: {},
             sizes: {},
             
@@ -35,26 +37,42 @@ export default {
     },
     mounted() {
         this.getAdSizes()
+        // this.getAd()
     },
     methods: {
         getAdSizes() {
+            // Possibly put iframe function here...so all 3 sizes of index.html show on the right.
+
+
+            // this.axios.get(`http://localhost/AdReviewBack/scandir.php?client=${this.Company}&adtype=${this.AdType}`)
             this.axios.get(`http://localhost/AdReviewBack/clients/${this.Company}/${this.AdType}/${this.AdVersion}/${this.VersionChoice}/scandir.php`)
             .then(response => {
+                document.getElementById("versionChoice").style.display = "none";
                 this.sizes = response.data
                 console.log(this.sizes)
                 }
             )           
         },
-        // chooseAd(size) {
-        //     console.log(size)
-        //     this.axios.get(`http://localhost/AdReviewBack/clients/${this.Company}/${this.AdType}/${this.AdVersion}/${versionChoice}scandir.php`)
+        chooseAd(renderAd) {
+            console.log(renderAd)
+            this.axios.get(`http://localhost/AdReviewBack/clients/${this.Company}/${this.AdType}/${this.AdVersion}/${this.VersionChoice}/${renderAd}/index.html`)
+            .then(response => {
+                //this.$router.push({path: `/ClientHome/${this.Company}/${this.AdType}/${this.AdVersion}/${this.VersionChoice}/${renderAd}`})
+                this.$parent.$parent.$parent.adrenderVariable = 'THIS IS WHERE THE AD GOES'
+                console
+                renderAd = response.data
+                console.log(renderAd)
+            })
+        },
+        // getAd() {
+        //     this.axios.get(`http://localhost/AdReviewBack/clients/${this.Company}/${this.AdType}/${this.AdVersion}/${this.VersionChoice}/${this.RenderAd}/index.html`)
         //     .then(response => {
-        //         this.$router.push({path: `/ClientHome/${this.Company}/${this.AdType}/${this.AdVersion}/${versionChoice}`})
-
-        //         size = response.data
-        //         console.log(size)
-        //     })
-        // }
+        //         // document.getElementById("renderAd").style.display = "none";
+        //         this.ad = response.data
+        //         console.log(this.ad)
+        //         }
+        //     )           
+        // },
     }
 }
 </script>
