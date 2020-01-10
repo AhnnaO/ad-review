@@ -23,10 +23,17 @@
                 </li>
                 
             </ul>
-            <router-view />
+            
         </div>
         <div class="render">
-            {{ adrenderVariable }}
+            <ul v-if="(sizeList != '')">
+                <li v-for="size in sizeList" :key="size" @click.capture="chooseSize(size)">                   
+                    <span><iframe :src="currentUrl + Company + '/' + campaignName + '/' + adTypeName + '/' + versionName + '/' + size + '/index.html'"
+                    />
+                    {{ size }}</span>
+                </li>
+            </ul>
+            <span>should be a list of sizes</span>
         </div>
         
     </div>
@@ -34,19 +41,21 @@
 <script>
 
 export default {
-    props: [ 'company',
-            'campaignNameSelected'],
+    props: [ 'company'],
     data() {
         return {
             campaigns: {},
             ad: {},
             Company: this.$props.company,
-            CampaignNameSelected: this.$props.campaignNameSelected, 
+            Version: this.$props.version, 
             adrenderVariable: '',
             adTypesList: '',
             campaignName: '',
             adTypeName: '',
-            versionList: ''
+            versionList: '',
+            sizeList: '',
+            versionName: '',
+            currentUrl: ''
         }
     },
     
@@ -55,12 +64,14 @@ export default {
     },
     methods: {
         getCampaigns() {
-            this.axios.get(`http://localhost/AdReviewBack/clients/${this.Company}/scandir.php`)
+            this.currentUrl = 'http://localhost/AdReviewBack/clients/'
+            this.axios.get(`http://localhost/AdReviewBack/clients/scandir.php?client=${this.Company}`)
             .then(response => {
                 this.campaigns = response.data
                 }
             )           
         },
+
         chooseCampaign(campaignNameSelected) {
             this.campaignName = campaignNameSelected
             this.axios.get(`http://localhost/AdReviewBack/clients/scandir.php?client=${this.Company}&campaign=${campaignNameSelected}`)
@@ -79,6 +90,12 @@ export default {
        },
        chooseVersion(versionSelected) {
            console.log(versionSelected);
+           this.versionName = versionSelected
+           this.axios.get(`http://localhost/AdReviewBack/clients/scandir.php?client=${this.Company}&campaign=${this.campaignName}&adtype=${this.adTypeName}&version=${versionSelected}`)
+           .then(response => {
+               this.sizeList = response.data
+               console.log(this.sizeList)
+           })
        }
     }
 }
@@ -91,7 +108,7 @@ $sidebar: #3E3C3B;
 $whiteBase: #FFFFFF;
     li {
         list-style: none;
-        font-size: 1.5em;
+        font-size: 1.5rem;
         color: $whiteBase;
         padding: 1%;
         margin-left: 0px;
@@ -114,12 +131,16 @@ $whiteBase: #FFFFFF;
     }
 
     .render {
-        width: 500px;
+        width: 100%;
         height: 100%;
         position: fixed;
         text-align: right;
-        border: 1px green solid;
+        border: 4px green solid;
         
+    }
+
+    span{
+        color: black;
     }
 
     
