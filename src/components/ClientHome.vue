@@ -26,10 +26,11 @@
             
         </div>
         <div class="render">
-            <ul v-if="(sizeList != '') && versionName == version">
-                <li v-for="size in sizeList" :key="size" @click.capture="chooseSize(size)">
-                    {{ size }}
-                    
+            <ul v-if="(sizeList != '')">
+                <li v-for="size in sizeList" :key="size" @click.capture="chooseSize(size)">                   
+                    <span><iframe :src="currentUrl + Company + '/' + campaignName + '/' + adTypeName + '/' + versionName + '/' + size + '/index.html'"
+                    />
+                    {{ size }}</span>
                 </li>
             </ul>
             <span>should be a list of sizes</span>
@@ -40,8 +41,7 @@
 <script>
 
 export default {
-    props: [ 'company',
-            'version'],
+    props: [ 'company'],
     data() {
         return {
             campaigns: {},
@@ -53,7 +53,9 @@ export default {
             campaignName: '',
             adTypeName: '',
             versionList: '',
-            sizeList: ''
+            sizeList: '',
+            versionName: '',
+            currentUrl: ''
         }
     },
     
@@ -62,12 +64,14 @@ export default {
     },
     methods: {
         getCampaigns() {
+            this.currentUrl = 'http://localhost/AdReviewBack/clients/'
             this.axios.get(`http://localhost/AdReviewBack/clients/scandir.php?client=${this.Company}`)
             .then(response => {
                 this.campaigns = response.data
                 }
             )           
         },
+
         chooseCampaign(campaignNameSelected) {
             this.campaignName = campaignNameSelected
             this.axios.get(`http://localhost/AdReviewBack/clients/scandir.php?client=${this.Company}&campaign=${campaignNameSelected}`)
@@ -133,6 +137,10 @@ $whiteBase: #FFFFFF;
         text-align: right;
         border: 4px green solid;
         
+    }
+
+    span{
+        color: black;
     }
 
     
