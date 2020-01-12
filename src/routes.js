@@ -10,8 +10,6 @@ export default [
     },
     {
         path: '/ClientHome/:company',
-        meta: {breadcrumb: 'ClientHome'},
-        
         name: 'ClientHome',
         props: true,
         component: ClientHome,
