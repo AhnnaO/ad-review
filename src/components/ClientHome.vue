@@ -45,9 +45,7 @@ export default {
     data() {
         return {
             campaigns: {},
-            ad: {},
             Company: this.$props.company,
-            Version: this.$props.version, 
             adrenderVariable: '',
             adTypesList: '',
             campaignName: '',
