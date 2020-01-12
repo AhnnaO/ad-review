@@ -1,5 +1,6 @@
 <template>
     <div class="campaigns-page">
+<!-- Entire file is unused as never attained functioning dynamic component -->
         <app-header 
         :company="company"/>
         <div class="sidebar">

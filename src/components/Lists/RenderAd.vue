@@ -1,5 +1,6 @@
 <template>
     <div>
+<!-- unnecessary component -->        
         {{ renderAd }}
     </div>
 

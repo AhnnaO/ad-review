@@ -1,5 +1,6 @@
 <template>
     <div class="campaigns">
+<!-- unnecessary component -->        
         <ul id="adTypes">
             <li v-for="campaign in campaigns" :key="campaign" @click.capture="chooseCampaign(campaign)"> 
                 {{ campaign }}            

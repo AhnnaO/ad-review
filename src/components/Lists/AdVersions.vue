@@ -1,6 +1,6 @@
 <template>
     <div>
-        
+<!-- unnecessary component -->        
             
                 <p>
                     {{ adVersion }}
