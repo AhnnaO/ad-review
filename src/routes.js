@@ -12,7 +12,6 @@ export default [
         path: '/ClientHome/:company',
         name: 'ClientHome',
         props: true,
-        component: ClientHome,
-    
+        component: ClientHome
     }
 ]

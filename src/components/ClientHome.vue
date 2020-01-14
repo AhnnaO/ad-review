@@ -21,19 +21,16 @@
                         </li>
                     </ul>
                 </li>
-                
             </ul>
-            
         </div>
         <div class="render">
             <ul v-if="(sizeList != '')">
-                <li v-for="size in sizeList" :key="size" @click.capture="chooseSize(size)">                   
-                    <span><iframe :src="currentUrl + Company + '/' + campaignName + '/' + adTypeName + '/' + versionName + '/' + size + '/index.html'"
+                <li class="final-list" v-for="size in sizeList" :key="size" @click.capture="chooseSize(size)"> 
+                    {{ size }}                  
+                    <iframe :src="currentUrl + Company + '/' + campaignName + '/' + adTypeName + '/' + versionName + '/' + size + '/index.html'"
                     />
-                    {{ size }}</span>
                 </li>
             </ul>
-            <span>should be a list of sizes</span>
         </div>
         
     </div>
@@ -112,6 +109,10 @@ $whiteBase: #FFFFFF;
         margin-left: 0px;
     }
 
+    .final-list {
+        color: $sidebar;
+    }
+
     .sidebar {
         height: 100%;
         width: 250px;
@@ -133,13 +134,8 @@ $whiteBase: #FFFFFF;
         height: 100%;
         position: fixed;
         text-align: right;
-        border: 4px green solid;
-        
     }
 
-    span{
-        color: black;
-    }
 
     
     
