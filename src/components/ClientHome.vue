@@ -27,7 +27,7 @@
             <ul v-if="(sizeList != '')">
                 <li class="final-list" v-for="size in sizeList" :key="size"> 
                     {{ size }}  
-    
+                        <br />
                         <iframe 
                         :src="currentUrl + Company + '/' + campaignName + '/' + adTypeName + '/' + versionName + '/' + size + '/index.html'"
                         :style="{ width: sizeSplit(size)[0] + 'px', height: sizeSplit(size)[1] + 'px' }"
@@ -131,6 +131,11 @@ $whiteBase: #FFFFFF;
 
     .final-list {
         color: $sidebar;
+        display: block;
+        padding-top: 10rem;
+        margin: 1rem;
+        
+
     }
 
     .sidebar {
@@ -155,6 +160,10 @@ $whiteBase: #FFFFFF;
         height: 100%;
         // position: fixed;
         text-align: right;
+    }
+
+    iframe {
+        border: none;
     }
     
     
