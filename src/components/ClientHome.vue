@@ -5,7 +5,7 @@
         <!-- <div class="render" v-if="routeExists"> -->
             <!-- <app-renderAd :renderAd="renderAd"/> -->
         <!-- </div> -->
-        
+        <!-- <div class="home-page"> -->
         <div class="sidebar">
             <ul id="adTypes" style="display:block;">
                 <li v-for="campaign in campaigns" :key="campaign" @click.capture="chooseCampaign(campaign)"> 
@@ -25,20 +25,26 @@
         </div>
         <div class="render">
             <ul v-if="(sizeList != '')">
-                <li class="final-list" v-for="size in sizeList" :key="size" @click.capture="chooseSize(size)"> 
-                    {{ size }}                  
-                    <iframe :src="currentUrl + Company + '/' + campaignName + '/' + adTypeName + '/' + versionName + '/' + size + '/index.html'"
-                    />
+                <li class="final-list" v-for="size in sizeList" :key="size"> 
+                    {{ size }}  
+    
+                        <iframe 
+                        :src="currentUrl + Company + '/' + campaignName + '/' + adTypeName + '/' + versionName + '/' + size + '/index.html'"
+                        :style="{ width: sizeSplit(size)[0] + 'px', height: sizeSplit(size)[1] + 'px' }"
+                        />
+                    
                 </li>
             </ul>
         </div>
-        
+        <!-- </div> -->
     </div>
 </template>
 <script>
 
 export default {
-    props: [ 'company'],
+    props: [ 
+        'company'
+    ],
     data() {
         return {
             campaigns: {},
@@ -50,13 +56,15 @@ export default {
             versionList: '',
             sizeList: '',
             versionName: '',
-            currentUrl: ''
+            currentUrl: '',
+            sizeAfterSplit: ''
         }
     },
     
     mounted() {
         this.getCampaigns()
     },
+    
     methods: {
         getCampaigns() {
             this.currentUrl = 'http://localhost/AdReviewBack/clients/'
@@ -75,23 +83,29 @@ export default {
                 this.adTypesList = response.data
             })
         },
+
        chooseType(adTypeSelected) {
-           console.log(adTypeSelected)
-           this.adTypeName = adTypeSelected
+            console.log(adTypeSelected)
+            this.adTypeName = adTypeSelected
             this.axios.get(`http://localhost/AdReviewBack/clients/scandir.php?client=${this.Company}&campaign=${this.campaignName}&adtype=${adTypeSelected}`)
             .then(response => {
                 this.versionList = response.data
             })
-       },
-       chooseVersion(versionSelected) {
-           console.log(versionSelected);
-           this.versionName = versionSelected
-           this.axios.get(`http://localhost/AdReviewBack/clients/scandir.php?client=${this.Company}&campaign=${this.campaignName}&adtype=${this.adTypeName}&version=${versionSelected}`)
-           .then(response => {
-               this.sizeList = response.data
-               console.log(this.sizeList)
-           })
-       }
+        },
+
+        chooseVersion(versionSelected) {
+            console.log(versionSelected)
+            this.versionName = versionSelected
+            this.axios.get(`http://localhost/AdReviewBack/clients/scandir.php?client=${this.Company}&campaign=${this.campaignName}&adtype=${this.adTypeName}&version=${versionSelected}`)
+            .then(response => {
+                this.sizeList = response.data
+               
+            })
+        },
+
+        sizeSplit(size){
+            return size.split("x")
+        }
     }
 }
 </script>
@@ -101,6 +115,12 @@ $buttonColor: #939A9F;
 $whiteBase: #FFFFFF;
 $sidebar: #3E3C3B;
 $whiteBase: #FFFFFF;
+
+.campaigns-page {
+    min-height: 100%;
+    overflow: auto;
+}
+
     li {
         list-style: none;
         font-size: 1.5rem;
@@ -116,10 +136,11 @@ $whiteBase: #FFFFFF;
     .sidebar {
         height: 100%;
         width: 250px;
+        top: 160px;
         position: fixed;
         z-index: 1;
         background-color: $sidebar;
-        overflow-x: hidden;
+        // overflow-x: hidden;
         padding-top: 20px;
     }
 
@@ -132,11 +153,9 @@ $whiteBase: #FFFFFF;
     .render {
         width: 100%;
         height: 100%;
-        position: fixed;
+        // position: fixed;
         text-align: right;
     }
-
-
     
     
 </style>

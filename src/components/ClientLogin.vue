@@ -41,7 +41,6 @@
                 <b-button id="submit-btn" type="submit" variant="primary">Submit</b-button>
                 
             </b-form>
-            <div class="footer"></div>
         </div>
     </div>
 </template>
@@ -98,6 +97,7 @@ export default {
 <style scoped>
     .container-fluid {
         background-color: #F74902;
+        height: 100vh;
     }
 
     .login-page {
@@ -112,8 +112,12 @@ export default {
         padding-top: 5%;
         padding-bottom: 3%; 
         background-color: #F74902;
-        height: 100%;
+        
  
+    }
+
+    form {
+        position: relative;
     }
 
     .form-box {
@@ -141,10 +145,6 @@ export default {
         background-color: #F74902;
         border: white solid 4px;
         margin-top: 15px;
-    }
-    .footer {
-        height: 100px;
-        background-color: #F74902;
     }
 
 </style>

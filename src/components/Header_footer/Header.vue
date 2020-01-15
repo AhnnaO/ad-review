@@ -56,6 +56,8 @@ header {
   padding: 50px;
   color: $whiteBase;
   font-size: 30px;
+  position: fixed;
+  width: 100%;
 }
 
 .btn-secondary {
