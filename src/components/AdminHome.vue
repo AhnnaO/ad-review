@@ -1,30 +1,28 @@
 <template>
-    <div class="campaigns-page">
+    <div class="admin-page">
         <app-header 
-        :company="company"/>
+        :admin="admin"/>
         <div class="sidebar">
-            <!-- <ul id="clients"  v-if="(Admin == 1)" v-show="true" style="display:block;">
+            <ul id="clients" style="display:block;">
                 <li v-for="client in clients" :key="client" @click.capture="chooseClient(client)">
-                    {{ client }}
-                </li>
-            </ul> -->
-            <ul id="adTypes">
-                <li v-for="campaign in campaigns" :key="campaign" @click.capture="chooseCampaign(campaign)"> 
-                    {{ campaign }}
-                    <ul v-if="(adTypesList != '') && campaignName == campaign">
-                        <li v-for="type in adTypesList" :key="type" @click.capture="chooseType(type)">
-                            {{ type }}
-                            <ul v-if="(versionList != '') && adTypeName == type">
-                                <li v-for="version in versionList" :key="version" @click.capture="chooseVersion(version)">
-                                    {{ version }}
+                    {{ client }} 
+                    <ul id="adTypes" v-if="(campaignList != '') && clientName == client">
+                        <li v-for="campaign in campaignList" :key="campaign" @click.capture="chooseCampaign(campaign)"> 
+                            {{ campaign }}
+                            <ul v-if="(adTypesList != '') && campaignName == campaign">
+                                <li v-for="type in adTypesList" :key="type" @click.capture="chooseType(type)">
+                                    {{ type }}
+                                    <ul v-if="(versionList != '') && adTypeName == type">
+                                        <li v-for="version in versionList" :key="version" @click.capture="chooseVersion(version)">
+                                            {{ version }}
+                                        </li>
+                                    </ul>
                                 </li>
                             </ul>
                         </li>
                     </ul>
                 </li>
             </ul>
-                <!-- </li>
-            </ul> -->
         </div>
         <div class="render">
             <ul v-if="(sizeList != '')">
@@ -32,7 +30,7 @@
                     {{ size }}  
                     <br />
                     <iframe 
-                    :src="currentUrl + Company + '/' + campaignName + '/' + adTypeName + '/' + versionName + '/' + size + '/index.html'"
+                    :src="currentUrl + clientName + '/' + campaignName + '/' + adTypeName + '/' + versionName + '/' + size + '/index.html'"
                     :style="{ width: sizeSplit(size)[0] + 'px', height: sizeSplit(size)[1] + 'px' }"
                     />                    
                 </li>
@@ -45,15 +43,13 @@
 
 export default {
     props: [ 
-        'company',
-        // 'admin'
+        // 'company',
+        'admin'
     ],
     data() {
         return {
             clients: {},
-            campaigns: {},
-            Company: this.$props.company,
-            adrenderVariable: '',
+            campaignList: '',
             adTypesList: '',
             campaignName: '',
             adTypeName: '',
@@ -62,40 +58,47 @@ export default {
             versionName: '',
             currentUrl: '',
             sizeAfterSplit: '',
-            // Admin: false
+            Admin: false
         }
     },
     
     mounted() {
-        
-        this.getCampaigns()
+        this.getClients()
     },
     
     methods: {
-        
-
-        getCampaigns() {
+        getClients() {
             this.currentUrl = 'http://localhost/AdReviewBack/clients/'
-            this.axios.get(`http://localhost/AdReviewBack/clients/scandir.php?client=${this.Company}`)
+            this.axios.get(`http://localhost/AdReviewBack/clients/scandir.php`)
             .then(response => {
-                this.campaigns = response.data
-                console.log(this.campaigns)
-                }
-            )           
+                this.clients = response.data
+                console.log(this.clients)
+            })
+        },
+
+        chooseClient(clientSelected) {
+            this.clientName = clientSelected
+            this.axios.get(`http://localhost/AdReviewBack/clients/scandir.php?client=${this.clientName}`)
+            .then(response => {
+                this.campaignList = response.data
+                console.log(this.clientName)
+                console.log(this.campaignList)
+            })
         },
 
         chooseCampaign(campaignNameSelected) {
             this.campaignName = campaignNameSelected
-            this.axios.get(`http://localhost/AdReviewBack/clients/scandir.php?client=${this.Company}&campaign=${campaignNameSelected}`)
+            this.axios.get(`http://localhost/AdReviewBack/clients/scandir.php?client=${this.clientName}&campaign=${campaignNameSelected}`)
             .then(response => {
                 this.adTypesList = response.data
+                console.log(this.campaignName)
             })
         },
 
        chooseType(adTypeSelected) {
             console.log(adTypeSelected)
             this.adTypeName = adTypeSelected
-            this.axios.get(`http://localhost/AdReviewBack/clients/scandir.php?client=${this.Company}&campaign=${this.campaignName}&adtype=${adTypeSelected}`)
+            this.axios.get(`http://localhost/AdReviewBack/clients/scandir.php?client=${this.clientName}&campaign=${this.campaignName}&adtype=${adTypeSelected}`)
             .then(response => {
                 this.versionList = response.data
             })
@@ -104,7 +107,7 @@ export default {
         chooseVersion(versionSelected) {
             console.log(versionSelected)
             this.versionName = versionSelected
-            this.axios.get(`http://localhost/AdReviewBack/clients/scandir.php?client=${this.Company}&campaign=${this.campaignName}&adtype=${this.adTypeName}&version=${versionSelected}`)
+            this.axios.get(`http://localhost/AdReviewBack/clients/scandir.php?client=${this.clientName}&campaign=${this.campaignName}&adtype=${this.adTypeName}&version=${versionSelected}`)
             .then(response => {
                 this.sizeList = response.data
                
@@ -124,16 +127,19 @@ $whiteBase: #FFFFFF;
 $sidebar: #3E3C3B;
 $whiteBase: #FFFFFF;
 
-.campaigns-page {
+.admin-page {
     min-height: 100%;
     overflow: auto;
 }
 
+#clients {
+    padding: 1rem;
+}
     li {
         list-style: none;
         font-size: 1.5rem;
         color: $whiteBase;
-        padding: 1%;
+        padding-left: 0px;
         margin-left: 0px;
     }
 
@@ -148,7 +154,7 @@ $whiteBase: #FFFFFF;
 
     .sidebar {
         height: 100%;
-        width: 250px;
+        width: 260px;
         top: 160px;
         position: fixed;
         z-index: 1;

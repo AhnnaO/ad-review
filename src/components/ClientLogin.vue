@@ -58,25 +58,33 @@ export default {
             arrayResponse: [],
             company: '',
             id: '',
+            admin: '',
             show: true
         }
     },
+
     methods: {
         onSubmit(evt) {
             evt.preventDefault()
                 if(this.form.companyName != "" && this.form.password != "") {
                     this.axios.get('http://localhost/AdReviewBack/Users/readUser.php?' + 'company_name=' + this.form.companyName + '&password=' + this.form.password)
                     .then (response => {
-                        
                         this.company = response.data[0].company_name
                         this.id = response.data[0].id
+                        this.admin = response.data[0].admin
+                        if(this.admin == 0){
                         this.$router.push({path: `/ClientHome/${this.company}`})
                         console.log(this.id)
+                        console.log(this.admin)
+                        } else {
+                            this.$router.push({path: `/AdminHome/`})
+                            console.log(this.id)
+                        console.log(this.admin)
+                        }
                     }
 
                     )} else {
-                    // alert("A username and password must be present.")
-                    console.log("A username and password must be present.")
+                    alert("A username and password must be present.")
                 }
             },        
 
@@ -90,8 +98,7 @@ export default {
                 this.show = true
             })
         }
-    }
-    
+    },
 }
 </script>
 <style scoped>

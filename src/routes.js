@@ -1,5 +1,6 @@
 import ClientLogin from './components/ClientLogin'
 import ClientHome from './components/ClientHome'
+import AdminHome from './components/AdminHome'
 
 
 export default [
@@ -13,5 +14,10 @@ export default [
         name: 'ClientHome',
         props: true,
         component: ClientHome
+    },
+    {
+        path: '/AdminHome',
+        name: 'AdminHome',
+        component: AdminHome
     }
 ]
