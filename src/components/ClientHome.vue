@@ -1,13 +1,12 @@
 <template>
+
     <div class="campaigns-page">
+        <!-- Header component with admin prop from login -->
         <app-header 
         :company="company"/>
+
+        <!-- loops run through the backend (soon to be server) directory with the use of scandir() php function -->
         <div class="sidebar">
-            <!-- <ul id="clients"  v-if="(Admin == 1)" v-show="true" style="display:block;">
-                <li v-for="client in clients" :key="client" @click.capture="chooseClient(client)">
-                    {{ client }}
-                </li>
-            </ul> -->
             <ul id="adTypes">
                 <li v-for="campaign in campaigns" :key="campaign" @click.capture="chooseCampaign(campaign)"> 
                     {{ campaign }}
@@ -23,9 +22,9 @@
                     </ul>
                 </li>
             </ul>
-                <!-- </li>
-            </ul> -->
         </div>
+
+        <!-- Final loop and rendering of html from the backend (server) -->
         <div class="render">
             <ul v-if="(sizeList != '')">
                 <li class="final-list" v-for="size in sizeList" :key="size"> 
@@ -40,20 +39,22 @@
         </div>
         <!-- </div> -->
     </div>
+
 </template>
+
 <script>
 
 export default {
-    props: [ 
+
+props: [ 
         'company',
-        // 'admin'
     ],
+
     data() {
         return {
             clients: {},
             campaigns: {},
             Company: this.$props.company,
-            adrenderVariable: '',
             adTypesList: '',
             campaignName: '',
             adTypeName: '',
@@ -61,8 +62,7 @@ export default {
             sizeList: '',
             versionName: '',
             currentUrl: '',
-            sizeAfterSplit: '',
-            // Admin: false
+            sizeAfterSplit: ''
         }
     },
     
@@ -72,8 +72,8 @@ export default {
     },
     
     methods: {
-        
 
+        // Mounted function to show campaign list directly, gets data from server side
         getCampaigns() {
             this.currentUrl = 'http://localhost/AdReviewBack/clients/'
             this.axios.get(`http://localhost/AdReviewBack/clients/scandir.php?client=${this.Company}`)
@@ -116,8 +116,11 @@ export default {
         }
     }
 }
+
 </script>
+
 <style lang="scss" scoped>
+
 $isobarOrange: #F74902;
 $buttonColor: #939A9F;
 $whiteBase: #FFFFFF;
@@ -129,50 +132,46 @@ $whiteBase: #FFFFFF;
     overflow: auto;
 }
 
-    li {
-        list-style: none;
-        font-size: 1.5rem;
-        color: $whiteBase;
-        padding: 1%;
-        margin-left: 0px;
-    }
+li {
+    list-style: none;
+    font-size: 1.5rem;
+    color: $whiteBase;
+    padding: 1%;
+    margin-left: 0px;
+}
 
-    .final-list {
-        color: $sidebar;
-        display: block;
-        padding-top: 10rem;
-        margin: 1rem;
-        
+.final-list {
+    color: $sidebar;
+    display: block;
+    padding-top: 10rem;
+    margin: 1rem;
+}
 
-    }
+.sidebar {
+    height: 100%;
+    width: 250px;
+    top: 160px;
+    position: fixed;
+    z-index: 1;
+    background-color: $sidebar;
+    padding-top: 20px;
+}
 
-    .sidebar {
-        height: 100%;
-        width: 250px;
-        top: 160px;
-        position: fixed;
-        z-index: 1;
-        background-color: $sidebar;
-        // overflow-x: hidden;
-        padding-top: 20px;
-    }
+.btn-secondary {
+    background-color: $buttonColor;
+    border-color: $whiteBase;
+    margin-left: 25px;
+}
 
-    .btn-secondary {
-        background-color: $buttonColor;
-        border-color: $whiteBase;
-        margin-left: 25px;
-    }
+.render {
+    width: 100%;
+    height: 100%;
+    text-align: right;
+}
 
-    .render {
-        width: 100%;
-        height: 100%;
-        // position: fixed;
-        text-align: right;
-    }
+iframe {
+    border: none;
+}
 
-    iframe {
-        border: none;
-    }
-    
     
 </style>
