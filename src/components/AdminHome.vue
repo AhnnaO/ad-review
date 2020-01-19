@@ -1,7 +1,11 @@
 <template>
     <div class="admin-page">
+
+        <!-- Header component with admin prop from login -->
         <app-header 
         :admin="admin"/>
+        
+        <!-- loops run through the backend (soon to be server) directory with the use of scandir() php function -->
         <div class="sidebar">
             <ul id="clients" style="display:block;">
                 <li v-for="client in clients" :key="client" @click.capture="chooseClient(client)">
@@ -24,6 +28,8 @@
                 </li>
             </ul>
         </div>
+
+        <!-- Final loop and rendering of html from the backend (server) -->
         <div class="render">
             <ul v-if="(sizeList != '')">
                 <li class="final-list" v-for="size in sizeList" :key="size"> 
@@ -36,16 +42,17 @@
                 </li>
             </ul>
         </div>
-        <!-- </div> -->
     </div>
 </template>
+
 <script>
 
 export default {
+    
     props: [ 
-        // 'company',
         'admin'
     ],
+
     data() {
         return {
             clients: {},
@@ -57,7 +64,6 @@ export default {
             sizeList: '',
             versionName: '',
             currentUrl: '',
-            sizeAfterSplit: '',
             Admin: false
         }
     },
@@ -67,12 +73,13 @@ export default {
     },
     
     methods: {
+
+        // Mounted function to show client list directly, gets data from server side
         getClients() {
             this.currentUrl = 'http://localhost/AdReviewBack/clients/'
             this.axios.get(`http://localhost/AdReviewBack/clients/scandir.php`)
             .then(response => {
                 this.clients = response.data
-                console.log(this.clients)
             })
         },
 
@@ -81,8 +88,6 @@ export default {
             this.axios.get(`http://localhost/AdReviewBack/clients/scandir.php?client=${this.clientName}`)
             .then(response => {
                 this.campaignList = response.data
-                console.log(this.clientName)
-                console.log(this.campaignList)
             })
         },
 
@@ -91,7 +96,6 @@ export default {
             this.axios.get(`http://localhost/AdReviewBack/clients/scandir.php?client=${this.clientName}&campaign=${campaignNameSelected}`)
             .then(response => {
                 this.adTypesList = response.data
-                console.log(this.campaignName)
             })
         },
 
@@ -119,8 +123,11 @@ export default {
         }
     }
 }
+
 </script>
+
 <style lang="scss" scoped>
+
 $isobarOrange: #F74902;
 $buttonColor: #939A9F;
 $whiteBase: #FFFFFF;
@@ -135,50 +142,49 @@ $whiteBase: #FFFFFF;
 #clients {
     padding: 1rem;
 }
-    li {
-        list-style: none;
-        font-size: 1.5rem;
-        color: $whiteBase;
-        padding-left: 0px;
-        margin-left: 0px;
-    }
-
-    .final-list {
-        color: $sidebar;
-        display: block;
-        padding-top: 10rem;
-        margin: 1rem;
-        
-
-    }
-
-    .sidebar {
-        height: 100%;
-        width: 260px;
-        top: 160px;
-        position: fixed;
-        z-index: 1;
-        background-color: $sidebar;
-        // overflow-x: hidden;
-        padding-top: 20px;
-    }
-
-    .btn-secondary {
-        background-color: $buttonColor;
-        border-color: $whiteBase;
-        margin-left: 25px;
-    }
-
-    .render {
-        width: 100%;
-        height: 100%;
-        // position: fixed;
-        text-align: right;
-    }
-
-    iframe {
-        border: none;
-    }
     
+li {
+    list-style: none;
+    font-size: 1.5rem;
+    color: $whiteBase;
+    padding-left: 0px;
+    margin-left: 0px;
+}
+
+.final-list {
+    color: $sidebar;
+    display: block;
+    padding-top: 10rem;
+    margin: 1rem;
     
+
+}
+
+.sidebar {
+    height: 100%;
+    width: 260px;
+    top: 160px;
+    position: fixed;
+    z-index: 1;
+    background-color: $sidebar;
+    padding-top: 20px;
+}
+
+.btn-secondary {
+    background-color: $buttonColor;
+    border-color: $whiteBase;
+    margin-left: 25px;
+}
+
+.render {
+    width: 100%;
+    height: 100%;
+    // position: fixed;
+    text-align: right;
+}
+
+iframe {
+    border: none;
+}
+   
 </style>

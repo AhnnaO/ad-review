@@ -1,11 +1,12 @@
 <template>
+
     <div class="login-page container-fluid">
         <div class="logo">
             <img src="../assets/isobar_logo_white.png">
         </div>
+        <!-- login form with bootstrap -->
         <div class="form">
-            <b-form class="form-box" @submit="onSubmit" @reset="onReset" v-if="show">
-                
+            <b-form class="form-box" @submit="onSubmit" @reset="onReset" v-if="show">               
                     <div class="col-xs-12">
                         <h1 class="login">Login</h1>   
                     </div>
@@ -24,6 +25,7 @@
                         >
                         </b-form-input>            
                     </b-form-group>
+
                     <b-form-group 
                         id="input-group-2"
                         label="Password:"
@@ -95,7 +97,7 @@ export default {
             this.form.password = '',
             this.show = false,
             this.$nextTick(() => {
-                this.show = true
+            this.show = true
             })
         }
     },

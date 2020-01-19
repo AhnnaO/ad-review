@@ -4,6 +4,7 @@ import AdminHome from './components/AdminHome'
 
 
 export default [
+
     {
         path: '/',
         name: 'ClientLogin',
@@ -20,4 +21,5 @@ export default [
         name: 'AdminHome',
         component: AdminHome
     }
+
 ]
